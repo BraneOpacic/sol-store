@@ -7,7 +7,8 @@ import { AnimatedButton } from "@/components/AnimatedButton";
 import { useProduct } from "@/hooks/useProduct";
 
 export const Product = ({ product }: { product: IProduct }) => {
-  const { isAdded, addToCart } = useProduct(product);
+  const { isAdded, addToCart, isImageLoading, setIsImageLoading } =
+    useProduct(product);
 
   const {
     name,
@@ -26,11 +27,18 @@ export const Product = ({ product }: { product: IProduct }) => {
       <div className="flex flex-col sm:flex-row flex-wrap h-auto max-w-[950px] min-h-[200px] border-2 rounded-md mb-10">
         <div className="w-full md:w-1/3 relative h-48 md:h-auto">
           <div className="image-container rounded-t-md md:rounded-none md:rounded-l-md">
+            {isImageLoading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+                <span>Loading image...</span>
+              </div>
+            )}
             <Image
               src={tempImageSrc}
               alt="Temp image"
               fill
+              priority
               className="image"
+              onLoad={() => setIsImageLoading(false)}
             />
           </div>
         </div>
@@ -38,7 +46,6 @@ export const Product = ({ product }: { product: IProduct }) => {
           <p className="text-xl text-gray-100">{description}</p>
         </div>
       </div>
-
       <div className="flex gap-4 items-center card-actions mt-4">
         <span className="text-4xl font-semibold">${price}</span>
         <AnimatedButton

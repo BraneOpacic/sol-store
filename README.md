@@ -21,7 +21,7 @@ yarn dev
 To build the project, run:
 
 ```
-yarn dev
+yarn build
 ```
 
 ## Deployment
