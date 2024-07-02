@@ -1,0 +1,51 @@
+name: Develop CI
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches:
+      - main
+
+jobs:
+  lint_all:
+    name: Linters
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Use latest stable NodeJS version
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+          cache: yarn
+
+      - name: Install Packages
+        run: yarn install --frozen-lockfile
+        env:
+          CI: true
+
+      - name: Lint
+        run: yarn lint
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Use latest stable NodeJS version
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+          cache: yarn
+
+      - name: Install Packages
+        run: yarn install --frozen-lockfile
+        env:
+          CI: true
+
+      - name: Build
+        run: yarn build
