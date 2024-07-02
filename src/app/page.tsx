@@ -1,6 +1,14 @@
-export default function Home() {
+import fetchProducts from "@/api/fetchProducts";
+import MainView from "@/components/MainView";
+
+const Home = async () => {
+  const products = await fetchProducts();
+
   return (
-    <div className="border-2 border-red-500 bg-teal-500">hello</div>
-    
+    <div>
+      <MainView products={products} />
+    </div>
   );
-}
+};
+
+export default Home;
