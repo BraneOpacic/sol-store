@@ -8,6 +8,8 @@ export const useProduct = (product: IProduct) => {
   const setIsDrawerOpen = useSetAtom(sideDrawerAtom);
   const setAddToCart = useSetAtom(productCartAtom);
 
+  const [isImageLoading, setIsImageLoading] = useState(true);
+
   const [isAdded, setIsAdded] = useState(false);
 
   const animateButton = () => {
@@ -40,5 +42,7 @@ export const useProduct = (product: IProduct) => {
   return {
     isAdded,
     addToCart,
+    isImageLoading,
+    setIsImageLoading,
   };
 };
