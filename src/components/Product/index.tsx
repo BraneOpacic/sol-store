@@ -19,21 +19,23 @@ export const Product = ({ product }: { product: IProduct }) => {
   } = product;
 
   return (
-    <div className="card-body">
+    <div className="card-body px-4 sm:px-6 lg:px-8">
       <div className="text-2xl text-white font-bold mt-4 mb-10 bg-gradient-to-r from-indigo-500 via-purple-500 p-4 rounded-lg shadow-lg flex text-left max-w-96">
         <h1>{name}</h1>
       </div>
-      <div className="flex flex-wrap h-[400px] border-2 rounded-md">
-        <div className="w-full sm:w-1/2 relative">
-          <Image
-            src={tempImageSrc}
-            alt="Temp image"
-            layout="fill"
-            objectFit="cover"
-          />
+      <div className="flex flex-col sm:flex-row flex-wrap h-auto max-w-[950px] min-h-[200px] border-2 rounded-md mb-10">
+        <div className="w-full md:w-1/3 relative h-48 md:h-auto">
+          <div className="image-container rounded-t-md md:rounded-none md:rounded-l-md">
+            <Image
+              src={tempImageSrc}
+              alt="Temp image"
+              fill
+              className="image"
+            />
+          </div>
         </div>
-        <div className="w-full sm:w-1/2 flex items-center justify-center px-4">
-          <p className="text-sm md:text-xl text-gray-100 my-4">{description}</p>
+        <div className="w-full md:w-2/3 flex items-center justify-center px-4 py-4">
+          <p className="text-xl text-gray-100">{description}</p>
         </div>
       </div>
 
@@ -46,8 +48,8 @@ export const Product = ({ product }: { product: IProduct }) => {
           }}
         />
       </div>
-      <div className="glass p-10 my-10 flex flex-col lg:flex-row rounded-md">
-        <div className="w-full lg:w-2/5 flex-grow mb-4 md:mb-0">
+      <div className="glass p-4 sm:p-6 lg:p-10 my-10 flex flex-col lg:flex-row rounded-md">
+        <div className="w-full lg:w-2/5 flex-grow mb-4 lg:mb-0">
           <div className="mt-4 text-gray-100 pr-5">
             <h3 className="text-lg font-semibold">Features:</h3>
             <ul className="list-disc ml-5">
@@ -59,7 +61,7 @@ export const Product = ({ product }: { product: IProduct }) => {
             </ul>
           </div>
         </div>
-        <div className="w-full lg:w-1/5 flex-grow mb-4 md:mb-0">
+        <div className="w-full lg:w-1/5 flex-grow mb-4 lg:mb-0">
           <div className="mt-4 text-gray-100">
             <h3 className="text-lg font-semibold">Specifications:</h3>
             <ul className="list-disc ml-5">
