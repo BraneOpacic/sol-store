@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { sideDrawerAtom } from "@/atoms/sideDrawerAtom";
 import { Product } from "@/types/Product";
 import { useSetAtom } from "jotai";
@@ -10,13 +10,16 @@ const useProductCard = (product: Product) => {
   const setIsDrawerOpen = useSetAtom(sideDrawerAtom);
   const setAddToCart = useSetAtom(productCartAtom);
   const [isAdded, setIsAdded] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const { name, description, id, price } = product;
 
   const animateButton = () => {
     setIsAdded(true);
-    //@TODO: clear timeout
-    setTimeout(() => setIsAdded(false), 600);
+    timeoutRef.current = setTimeout(() => {
+      setIsAdded(false);
+      timeoutRef.current = null;
+    }, 600);
   };
 
   const addToCart = () => {
@@ -44,6 +47,14 @@ const useProductCard = (product: Product) => {
   const handleCardClick = () => {
     router.push(`/product/${id}`);
   };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   return {
     name,
